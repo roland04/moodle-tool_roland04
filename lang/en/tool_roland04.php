@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Mikel Test Moodle plugin';
-$string['plugintitle'] = 'Plugin Title';
+$string['pluginname'] = 'TODO List';
+$string['plugintitle'] = 'TODO List';
 $string['helloworld'] = 'Hello World';
 $string['courseid'] = 'Course id: {$a}';
