@@ -15,34 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Main page.
+ * Lib.
  *
  * @package    tool_roland04
  * @copyright  2019 Mikel Martín
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__ . '/../../../config.php');
-require_once($CFG->libdir.'/adminlib.php');
-
-$cid = optional_param('courseid', 0, PARAM_INT);
-
-require_login();
-// admin_externalpage_setup('roland04');
-
-$url = new moodle_url('/admin/tool/roland04/index.php');
-$pagetitle = get_string('plugintitle', 'tool_roland04');
-
-$PAGE->set_context(context_system::instance());
-$PAGE->set_url($url, array('courseid' => $cid));
-$PAGE->set_pagelayout('report');
-$PAGE->set_title($pagetitle);
-$PAGE->set_heading(get_string('pluginname', 'tool_roland04'));
-
-echo $OUTPUT->header();
-echo $OUTPUT->heading($pagetitle);
-
-echo html_writer::div(get_string('helloworld', 'tool_roland04'));
-echo html_writer::tag('p', get_string('courseid', 'tool_roland04', $cid));
-
-echo $OUTPUT->footer();
+function tool_roland04_extend_navigation_course(navigation_node $parentnode, stdClass $course, context_course $context) {
+    $url = new moodle_url('/admin/tool/roland04/index.php', array('courseid' => $course->id));
+    $roland04node = navigation_node::create(get_string('pluginname', 'tool_roland04'), $url,
+            navigation_node::TYPE_COURSE, null, null, new pix_icon('i/settings', ''));
+    $parentnode->add_node($roland04node);
+}
