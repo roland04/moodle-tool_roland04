@@ -25,6 +25,6 @@
 function tool_roland04_extend_navigation_course(navigation_node $parentnode, stdClass $course, context_course $context) {
     $url = new moodle_url('/admin/tool/roland04/index.php', array('courseid' => $course->id));
     $roland04node = navigation_node::create(get_string('pluginname', 'tool_roland04'), $url,
-            navigation_node::TYPE_COURSE, null, null, new pix_icon('i/settings', ''));
+            navigation_node::TYPE_COURSE, null, null, new pix_icon('icon', '', 'tool_roland04'));
     $parentnode->add_node($roland04node);
 }
