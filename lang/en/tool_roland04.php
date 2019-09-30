@@ -25,3 +25,4 @@
 $string['pluginname'] = 'Mikel Test Moodle plugin';
 $string['plugintitle'] = 'Plugin Title';
 $string['helloworld'] = 'Hello World';
+$string['courseid'] = 'Course id: {$a}';
