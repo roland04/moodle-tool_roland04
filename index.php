@@ -15,13 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for details.
+ * Main page.
  *
  * @package    tool_roland04
  * @copyright  2019 Mikel Martín
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Mikel Test Moodle plugin';
-$string['plugintitle'] = 'Plugin Title';
-$string['helloworld'] = 'Hello World';
+require_once(__DIR__ . '/../../../config.php');
+// require_once($CFG->libdir.'/adminlib.php');
+
+admin_externalpage_setup('roland04');
+
+$url = new moodle_url('/admin/tool/roland04/index.php');
+$pagetitle = get_string('plugintitle', 'tool_roland04');
+$PAGE->set_context(context_system::instance());
+$PAGE->set_url($url);
+$PAGE->set_pagelayout('report');
+$PAGE->set_title($pagetitle);
+$PAGE->set_heading(get_string('pluginname', 'tool_roland04'));
+
+// echo $OUTPUT->header();
+// echo $OUTPUT->heading($pagetitle);
+
+echo get_string('helloworld', 'tool_roland04');
+
+// echo $OUTPUT->footer();
