@@ -28,7 +28,11 @@
  *
  * @param navigation_node $parentnode The navigation node to extend
  * @param stdClass $course The course to object for the report
+<<<<<<< HEAD
  * @param context_course $context The context of the course
+=======
+ * @param stdClass $context The context of the course
+>>>>>>> 1fa6fd99efab8150f0c86879104ec8b5837aa28c
  */
 function tool_roland04_extend_navigation_course(navigation_node $parentnode, stdClass $course, context_course $context) {
     $url = new moodle_url('/admin/tool/roland04/index.php', array('courseid' => $course->id));
