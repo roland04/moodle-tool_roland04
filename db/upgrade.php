@@ -71,7 +71,6 @@ defined('MOODLE_INTERNAL') || die();
         $dbman->add_key($table, $key);
 
         // Define index courseidname (unique) to be added to tool_roland04.
-        $table = new xmldb_table('tool_roland04');
         $index = new xmldb_index('courseidname', XMLDB_INDEX_UNIQUE, ['courseid', 'name']);
 
         // Conditionally launch add index courseidname.
