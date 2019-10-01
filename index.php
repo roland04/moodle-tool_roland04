@@ -34,7 +34,7 @@ $course = get_course($cid);
 $pagetitle = get_string('plugintitle', 'tool_roland04');
 
 $PAGE->set_pagelayout('standard');
-$PAGE->set_context(context_system::instance());
+$PAGE->set_context(context_course::instance($course->id));
 $PAGE->set_url($url, array('courseid' => $cid));
 $PAGE->set_title($course->shortname.': '.$pagetitle);
 $PAGE->set_heading($course->fullname);
@@ -44,7 +44,10 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
 
 $filteredusers = tool_roland04_api::count_users_like("dmi");
-
 echo html_writer::tag('p', get_string('courseid', 'tool_roland04', $filteredusers));
+
+// Show general table
+$table = new tool_roland04_table('tool_roland04', $course->id);
+$table->out(25, false);
 
 echo $OUTPUT->footer();
