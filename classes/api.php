@@ -15,36 +15,33 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Main page.
+ * tool_roland04 API
  *
  * @package    tool_roland04
  * @copyright  2019 Mikel Martín
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__ . '/../../../config.php');
-require_once($CFG->libdir.'/adminlib.php');
+defined('MOODLE_INTERNAL') || die();
 
-$cid = optional_param('courseid', 0, PARAM_INT);
+/**
+ * Class tool_roland04_api
+ *
+ * @package    tool_roland04
+ * @copyright  2019 Mikel Martín
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class tool_roland04_api {
 
-require_login();
-
-$url = new moodle_url('/admin/tool/roland04/index.php');
-$course = get_course($cid);
-$pagetitle = get_string('plugintitle', 'tool_roland04');
-
-$PAGE->set_pagelayout('standard');
-$PAGE->set_context(context_system::instance());
-$PAGE->set_url($url, array('courseid' => $cid));
-$PAGE->set_title($course->shortname.': '.$pagetitle);
-$PAGE->set_heading($course->fullname);
-$PAGE->navbar->add($pagetitle);
-
-echo $OUTPUT->header();
-echo $OUTPUT->heading($pagetitle);
-
-$filteredusers = tool_roland04_api::count_users_like("dmi");
-
-echo html_writer::tag('p', get_string('courseid', 'tool_roland04', $filteredusers));
-
-echo $OUTPUT->footer();
+    /**
+     * Retrieve number of registered users with firstname like "%ike%"
+     *
+     * @param string $likestr string for the LIKE comparison
+     * @return int retrieved integer
+     */
+    public static function count_users_like(string $likestr = ""): int {
+        global $DB;
+        
+        return $DB->count_records_sql('SELECT COUNT(id) FROM {user} WHERE '.$DB->sql_like('firstname', ':likestr'), ['likestr' => '%'.$likestr.'%']);
+    }
+}
