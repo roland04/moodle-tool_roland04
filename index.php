@@ -28,7 +28,6 @@ require_once($CFG->libdir.'/adminlib.php');
 $cid = optional_param('courseid', 0, PARAM_INT);
 
 require_login();
-// admin_externalpage_setup('roland04');
 
 $url = new moodle_url('/admin/tool/roland04/index.php');
 $pagetitle = get_string('plugintitle', 'tool_roland04');
