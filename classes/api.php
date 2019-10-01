@@ -41,7 +41,7 @@ class tool_roland04_api {
      */
     public static function count_users_like(string $likestr = ""): int {
         global $DB;
-        
+
         $sqllike = $DB->sql_like('firstname', ':likestr');
         $params = ['likestr' => '%'.$likestr.'%'];
         return $DB->count_records_sql('SELECT COUNT(id) FROM {user} WHERE '.$sqllike, $params);
@@ -51,9 +51,10 @@ class tool_roland04_api {
      * Generates Boostrap Badge HTML code
      *
      * @param string $text text for the badge
-     * @return string $bscolor boostrap color class (success/warning/...)
+     * @param string $bscolor boostrap color class (success/warning/...)
+     * @return string HTML code for the badge
      */
-    public static function bootstrap_badge(string $text, string $bscolor): string{
-        return '<span class="badge badge-'.$bscolor.'">'.$text.'</span>';
+    public static function bootstrap_badge(string $text, string $bscolor): string {
+        return html_writer::span($text, 'badge badge-'.$bscolor);
     }
 }

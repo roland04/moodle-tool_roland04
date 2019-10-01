@@ -38,6 +38,7 @@ class tool_roland04_table extends table_sql {
      * Sets up the tool_roland04_table parameters.
      *
      * @param string $uniqueid unique id of form.
+     * @param int $courseid
      */
     public function __construct($uniqueid, $courseid) {
         global $PAGE;
@@ -61,7 +62,7 @@ class tool_roland04_table extends table_sql {
         $this->sortable(false);
         $this->is_downloadable(false);
         $this->define_baseurl($PAGE->url);
-        $this->set_sql('id, name, completed, priority, timecreated, timemodified', '{tool_roland04}', 'courseid = :courseid', 
+        $this->set_sql('id, name, completed, priority, timecreated, timemodified', '{tool_roland04}', 'courseid = :courseid',
                 ['courseid' => $courseid]);
     }
 
@@ -82,7 +83,7 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_completed($row) {
-        return $row->completed ? tool_roland04_api::bootstrap_badge(get_string('yes'),"success") : tool_roland04_api::bootstrap_badge(get_string('no'),"danger");
+        return $row->completed ? tool_roland04_api::bootstrap_badge(get_string('yes'), "success") : tool_roland04_api::bootstrap_badge(get_string('no'), "danger");
     }
 
     /**
@@ -92,7 +93,7 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_priority($row) {
-        return $row->priority ? tool_roland04_api::bootstrap_badge(get_string('yes'),"success") : tool_roland04_api::bootstrap_badge(get_string('no'),"danger");
+        return $row->priority ? tool_roland04_api::bootstrap_badge(get_string('yes'), "success") : tool_roland04_api::bootstrap_badge(get_string('no'), "danger");
     }
 
     /**
@@ -105,7 +106,7 @@ class tool_roland04_table extends table_sql {
         return userdate($row->timecreated, get_string('strftimedatetime'));
     }
 
-        /**
+    /**
      * Generates column timemodified
      *
      * @param stdClass $row

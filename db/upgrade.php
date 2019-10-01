@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param int $oldversion The old version of tool roland04 in the DB.
  * @return bool
  */
- function xmldb_tool_roland04_upgrade(int $oldversion){
+function xmldb_tool_roland04_upgrade(int $oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
@@ -81,5 +81,4 @@ defined('MOODLE_INTERNAL') || die();
         // Roland04 savepoint reached.
         upgrade_plugin_savepoint(true, 2019100101, 'tool', 'roland04');
     }
-
- }
+}
