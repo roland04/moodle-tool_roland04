@@ -42,6 +42,8 @@ class tool_roland04_api {
     public static function count_users_like(string $likestr = ""): int {
         global $DB;
         
-        return $DB->count_records_sql('SELECT COUNT(id) FROM {user} WHERE '.$DB->sql_like('firstname', ':likestr'), ['likestr' => '%'.$likestr.'%']);
+        $sqllike = $DB->sql_like('firstname', ':likestr');
+        $params = ['likestr' => '%'.$likestr.'%'];
+        return $DB->count_records_sql('SELECT COUNT(id) FROM {user} WHERE '.$sqllike, $params);
     }
 }
