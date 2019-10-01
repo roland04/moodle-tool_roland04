@@ -82,7 +82,7 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_completed($row) {
-        return $row->completed ? get_string('yes') : get_string('no');
+        return $row->completed ? tool_roland04_api::bootstrap_badge(get_string('yes'),"success") : tool_roland04_api::bootstrap_badge(get_string('no'),"danger");
     }
 
     /**
@@ -92,7 +92,7 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_priority($row) {
-        return $row->priority ? get_string('yes') : get_string('no');
+        return $row->priority ? tool_roland04_api::bootstrap_badge(get_string('yes'),"success") : tool_roland04_api::bootstrap_badge(get_string('no'),"danger");
     }
 
     /**
