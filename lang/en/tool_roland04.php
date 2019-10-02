@@ -31,3 +31,6 @@ $string['completed'] = 'Completed';
 $string['priority'] = 'Priority';
 $string['timecreated'] = 'Time created';
 $string['timemodified'] = 'Time modified';
+$string['viewtodos'] = 'TODOs list';
+$string['addtodo'] = 'Add new TODO';
+$string['edittodo'] = 'Edit TODO';

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Main page.
+ * Edit TODO page.
  *
  * @package    tool_roland04
  * @copyright  2019 Mikel Martín
@@ -23,17 +23,16 @@
  */
 
 require_once(__DIR__ . '/../../../config.php');
-require_once($CFG->libdir.'/adminlib.php');
 
 $courseid = required_param('courseid', PARAM_INT);
 $course = get_course($courseid);
 
-require_login($courseid);
+require_login();
 $context = context_course::instance($course->id);
-require_capability('tool/roland04:view', $context);
+require_capability('tool/roland04:edit', $context);
 
-$url = new moodle_url('/admin/tool/roland04/index.php');
-$pagetitle = get_string('viewtodos', 'tool_roland04');
+$url = new moodle_url('/admin/tool/roland04/edit.php');
+$pagetitle = get_string('edittodo', 'tool_roland04');
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_course::instance($course->id));
@@ -45,12 +44,13 @@ $PAGE->navbar->add($pagetitle);
 echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
 
-// Show general table.
-$table = new tool_roland04_table('tool_roland04', $courseid);
-$table->out(25, false);
-
-echo $OUTPUT->box_start();
-echo $OUTPUT->single_button(new moodle_url('./edit.php', ['courseid' => $courseid]), get_string('addtodo', 'tool_roland04'), 'get');
-echo $OUTPUT->box_end();
-
-echo $OUTPUT->footer();
+$mform = new tool_roland04_form();
+ 
+if ($mform->is_cancelled()) {
+    //Handle form cancel operation, if cancel button is present on form
+} else if ($fromform = $mform->get_data()) {
+} else {
+  //Set default data (if any)
+//   $mform->set_data($toform);
+  $mform->display();
+}
