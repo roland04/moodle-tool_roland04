@@ -61,7 +61,7 @@ class tool_roland04_api {
     /**
      * Generates dump data
      *
-     * @param int $i
+     * @param int $q number of todos to generate
      * @param int $courseid
      */
     public static function generate_todos(int $q, int $courseid) {
@@ -69,12 +69,12 @@ class tool_roland04_api {
 
         $currenttime = time();
         $newtodos = array();
-        for ($i=0; $i < $q; $i++) { 
+        for ($i = 0; $i < $q; $i++) {
             $newtodo = [
                 'courseid' => $courseid,
                 'name' => "TODO-".rand()."-".$i,
-                'completed' => rand(0,1),
-                'priority' => rand(0,1),
+                'completed' => rand(0, 1),
+                'priority' => rand(0, 1),
                 'timecreated' => $currenttime,
                 'timemodified' => $currenttime
             ];
