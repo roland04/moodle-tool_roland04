@@ -127,8 +127,8 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_actions($row) {
-        $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]),html_writer::tag('i', '', ['class' => 'icon fa fa-pencil']));
-        $deletelink = html_writer::link(new moodle_url('./delete.php', ['id' => $row->id]),html_writer::tag('i', '', ['class' => 'icon fa fa-trash']));
+        $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]), html_writer::tag('i', '', ['class' => 'icon fa fa-pencil']));
+        $deletelink = html_writer::link(new moodle_url('./delete.php', ['id' => $row->id]), html_writer::tag('i', '', ['class' => 'icon fa fa-trash']));
         return $editlink.$deletelink;
     }
 }

@@ -28,7 +28,7 @@ global $DB;
 
 $id = optional_param('id', 0, PARAM_INT);
 
-if ($id){
+if ($id) {
     $todo = $DB->get_record('tool_roland04', ['id' => $id], '*' , MUST_EXIST);
     $courseid = $todo->courseid;
     $pagetitle = get_string('edittodo', 'tool_roland04');
@@ -63,11 +63,11 @@ $returnurl = new moodle_url('/admin/tool/roland04/index.php', ['courseid' => $co
 if ($mform->is_cancelled()) {
     redirect($returnurl);
 } else if ($data = $mform->get_data()) {
-    if ($id){
+    if ($id) {
         // Update todo.
         $data->timemodified = time();
         $DB->update_record('tool_roland04', $data);
-    } else{
+    } else {
         // New todo.
         $data->timecreated = $data->timemodified = time();
         $DB->insert_record('tool_roland04', $data);

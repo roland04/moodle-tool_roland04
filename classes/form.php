@@ -69,7 +69,7 @@ class tool_roland04_form extends moodleform {
      * @param array $files
      * @return array
      */
-    function validation($data, $files) {
+    public function validation($data, $files) {
         global $DB;
 
         $errors = parent::validation($data, $files);
