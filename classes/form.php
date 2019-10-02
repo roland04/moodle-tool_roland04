@@ -67,6 +67,15 @@ class tool_roland04_form extends moodleform {
      * @return array
      */
     function validation($data, $files) {
-        return array();
+        global $DB;
+
+        $errors = parent::validation($data, $files);
+
+        $select = 'id != :id AND name = :name AND courseid = :courseid';
+        $params = ['id' => $data['id'], 'name' => $data['name'], 'courseid' => $data['courseid']];
+        if ($DB->record_exists_select('tool_roland04', $select, $params)) {
+            $errors['name'] = get_string('errornameexists', 'tool_roland04');
+        }
+        return $errors;
     }
 }

@@ -25,32 +25,39 @@
 require_once(__DIR__ . '/../../../config.php');
 
 $courseid = required_param('courseid', PARAM_INT);
+$id = optional_param('id', 0, PARAM_INT);
+
 $course = get_course($courseid);
 
 require_login();
-$context = context_course::instance($course->id);
+$context = context_course::instance($courseid);
 require_capability('tool/roland04:edit', $context);
 
 $url = new moodle_url('/admin/tool/roland04/edit.php');
-$pagetitle = get_string('edittodo', 'tool_roland04');
+$pagetitle = get_string('addtodo', 'tool_roland04');
 
 $PAGE->set_pagelayout('standard');
-$PAGE->set_context(context_course::instance($course->id));
-$PAGE->set_url($url, array('courseid' => $courseid));
+$PAGE->set_context($context);
+$PAGE->set_url($url, array('courseid' => $courseid, 'id' => $id));
 $PAGE->set_title($course->shortname.': '.$pagetitle);
 $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add($pagetitle);
 
+$mform = new tool_roland04_form();
+$mform->set_data(['courseid' => $courseid, 'id' => $id]);
+
+$returnurl = new moodle_url('/admin/tool/roland04/index.php', ['courseid' => $courseid]);
+if ($mform->is_cancelled()) {
+    redirect($returnurl);
+} else if ($data = $mform->get_data()) {
+    $data->timecreated = $data->timemodified = time();
+    $DB->insert_record('tool_roland04', $data);
+    redirect($returnurl);
+}
+
 echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
 
-$mform = new tool_roland04_form();
- 
-if ($mform->is_cancelled()) {
-    //Handle form cancel operation, if cancel button is present on form
-} else if ($fromform = $mform->get_data()) {
-} else {
-  //Set default data (if any)
-//   $mform->set_data($toform);
-  $mform->display();
-}
+$mform->display();
+
+echo $OUTPUT->footer();

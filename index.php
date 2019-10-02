@@ -26,21 +26,21 @@ require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 
 $courseid = required_param('courseid', PARAM_INT);
+
 $course = get_course($courseid);
 
 require_login($courseid);
-$context = context_course::instance($course->id);
+$context = context_course::instance($courseid);
 require_capability('tool/roland04:view', $context);
 
 $url = new moodle_url('/admin/tool/roland04/index.php');
 $pagetitle = get_string('viewtodos', 'tool_roland04');
 
 $PAGE->set_pagelayout('standard');
-$PAGE->set_context(context_course::instance($course->id));
+$PAGE->set_context($context);
 $PAGE->set_url($url, array('courseid' => $courseid));
 $PAGE->set_title($course->shortname.': '.$pagetitle);
 $PAGE->set_heading($course->fullname);
-$PAGE->navbar->add($pagetitle);
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
