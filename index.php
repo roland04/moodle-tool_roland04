@@ -26,11 +26,13 @@ require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 
 $cid = optional_param('courseid', 0, PARAM_INT);
+$course = get_course($cid);
 
 require_login();
+$context = context_course::instance($course->id);
+require_capability('tool/roland04:view', $context);
 
 $url = new moodle_url('/admin/tool/roland04/index.php');
-$course = get_course($cid);
 $pagetitle = get_string('plugintitle', 'tool_roland04');
 
 $PAGE->set_pagelayout('standard');
