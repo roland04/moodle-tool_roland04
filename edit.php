@@ -24,10 +24,23 @@
 
 require_once(__DIR__ . '/../../../config.php');
 
-$courseid = required_param('courseid', PARAM_INT);
+global $DB;
+
 $id = optional_param('id', 0, PARAM_INT);
 
+if ($id){
+    $todo = $DB->get_record('tool_roland04', ['id' => $id], '*' , MUST_EXIST);
+    $courseid = $todo->courseid;
+    $pagetitle = get_string('edittodo', 'tool_roland04');
+    $toform = $todo;
+} else {
+    $courseid = required_param('courseid', PARAM_INT);
+    $pagetitle = get_string('addtodo', 'tool_roland04');
+    $toform = new stdClass();
+}
+
 $course = get_course($courseid);
+$toform->courseid = $courseid;
 
 require_login();
 $context = context_course::instance($courseid);
@@ -44,14 +57,21 @@ $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add($pagetitle);
 
 $mform = new tool_roland04_form();
-$mform->set_data(['courseid' => $courseid, 'id' => $id]);
+$mform->set_data($toform);
 
 $returnurl = new moodle_url('/admin/tool/roland04/index.php', ['courseid' => $courseid]);
 if ($mform->is_cancelled()) {
     redirect($returnurl);
 } else if ($data = $mform->get_data()) {
-    $data->timecreated = $data->timemodified = time();
-    $DB->insert_record('tool_roland04', $data);
+    if ($id){
+        // Update todo.
+        $data->timemodified = time();
+        $DB->update_record('tool_roland04', $data);
+    } else{
+        // New todo.
+        $data->timecreated = $data->timemodified = time();
+        $DB->insert_record('tool_roland04', $data);
+    }
     redirect($returnurl);
 }
 

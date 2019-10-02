@@ -47,12 +47,16 @@ class tool_roland04_table extends table_sql {
 
         $this->set_attribute('id', 'tool_roland04_general');
         $columns = array('completed', 'name', 'priority', 'timecreated', 'timemodified');
+        if (has_capability('tool/roland04:edit', context_course::instance($courseid))) {
+            $columns[] = 'actions';
+        }
         $headers = array(
             '',
             get_string('name', 'tool_roland04'),
             get_string('priority', 'tool_roland04'),
             get_string('timecreated', 'tool_roland04'),
             get_string('timemodified', 'tool_roland04'),
+            ''
         );
 
         $this->define_columns($columns);
@@ -114,5 +118,17 @@ class tool_roland04_table extends table_sql {
      */
     protected function col_timemodified($row) {
         return userdate($row->timemodified, get_string('strftimedatetime'));
+    }
+
+    /**
+     * Generates column actions
+     *
+     * @param stdClass $row
+     * @return string
+     */
+    protected function col_actions($row) {
+        $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]),html_writer::tag('i', '', ['class' => 'icon fa fa-pencil']));
+        $deletelink = html_writer::link(new moodle_url('./delete.php', ['id' => $row->id]),html_writer::tag('i', '', ['class' => 'icon fa fa-trash']));
+        return $editlink.$deletelink;
     }
 }
