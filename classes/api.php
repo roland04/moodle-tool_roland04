@@ -24,6 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+define('ICON_CHECKED', 'fa-check-square');
+define('ICON_UNCHECKED', 'fa-check-square');
+define('BADGE_GREY', 'badge-secondary');
+define('BADGE_ORANGE', 'badge-warning');
+define('BADGE_RED', 'badge-danger');
+
 /**
  * Class tool_roland04_api
  *
@@ -34,28 +40,27 @@ defined('MOODLE_INTERNAL') || die();
 class tool_roland04_api {
 
     /**
-     * Retrieve number of registered users with firstname like "%ike%"
-     *
-     * @param string $likestr string for the LIKE comparison
-     * @return int retrieved integer
-     */
-    public static function count_users_like(string $likestr = ""): int {
-        global $DB;
-
-        $sqllike = $DB->sql_like('firstname', ':likestr');
-        $params = ['likestr' => '%'.$likestr.'%'];
-        return $DB->count_records_sql('SELECT COUNT(id) FROM {user} WHERE '.$sqllike, $params);
-    }
-
-    /**
      * Generates Boostrap Badge HTML code
      *
-     * @param string $text text for the badge
-     * @param string $bscolor boostrap color class (success/warning/...)
+     * @param string $priority text for the badge
      * @return string HTML code for the badge
      */
-    public static function bootstrap_badge(string $text, string $bscolor): string {
-        return html_writer::span($text, 'badge badge-'.$bscolor);
+    public static function print_priority_badge(string $priority): string {
+        switch ($priority) {
+            case 0:
+                $badgeclass = BADGE_GREY;
+                break;
+            case 1:
+                $badgeclass = BADGE_ORANGE;
+                break;
+            case 2:
+                $badgeclass = BADGE_RED;
+                break;
+            default:
+                $badgeclass = BADGE_GREY;
+                break;
+        }
+        return html_writer::span(get_string('priority'.$priority, 'tool_roland04'), 'badge '.$badgeclass);
     }
 
     /**
@@ -64,8 +69,8 @@ class tool_roland04_api {
      * @param int $completed
      * @return string HTML code for the icon
      */
-    public static function completion_icon(int $completed): string {
-        $iconclass = $completed ? 'fa-check-square' : 'fa-square';
+    public static function print_completion_icon(int $completed): string {
+        $iconclass = $completed ? ICON_CHECKED : ICON_UNCHECKED;
         return html_writer::tag('i', '', ['class' => 'icon fa '.$iconclass]);
     }
 
