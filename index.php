@@ -25,8 +25,8 @@
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 
-$cid = optional_param('courseid', 0, PARAM_INT);
-$course = get_course($cid);
+$courseid = required_param('courseid', PARAM_INT);
+$course = get_course($courseid);
 
 require_login();
 $context = context_course::instance($course->id);
@@ -37,16 +37,13 @@ $pagetitle = get_string('plugintitle', 'tool_roland04');
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_course::instance($course->id));
-$PAGE->set_url($url, array('courseid' => $cid));
+$PAGE->set_url($url, array('courseid' => $courseid));
 $PAGE->set_title($course->shortname.': '.$pagetitle);
 $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add($pagetitle);
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
-
-// Generate TODOs.
-tool_roland04_api::generate_todos(1, $course->id);
 
 // Show general table.
 $table = new tool_roland04_table('tool_roland04', $course->id);
