@@ -24,8 +24,8 @@
 
 $string['pluginname'] = 'TODO List';
 $string['plugintitle'] = 'TODO List';
-$string['helloworld'] = 'Hello World';
-$string['courseid'] = 'Course id: {$a}';
+$string['roland04:view'] = 'View TODOs in a course';
+$string['roland04:edit'] = 'Edit TODOs in a course';
 $string['name'] = 'Name';
 $string['completed'] = 'Completed';
 $string['priority'] = 'Priority';

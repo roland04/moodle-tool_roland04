@@ -43,10 +43,7 @@ $PAGE->navbar->add($pagetitle);
 echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
 
-$filteredusers = tool_roland04_api::count_users_like("dmi");
-echo html_writer::tag('p', get_string('courseid', 'tool_roland04', $filteredusers));
-
-// Show general table
+// Show general table.
 $table = new tool_roland04_table('tool_roland04', $course->id);
 $table->out(25, false);
 

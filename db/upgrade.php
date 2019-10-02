@@ -70,7 +70,14 @@ function xmldb_tool_roland04_upgrade(int $oldversion) {
         // Launch add key courseid.
         $dbman->add_key($table, $key);
 
+        // Roland04 savepoint reached.
+        upgrade_plugin_savepoint(true, 2019100101, 'tool', 'roland04');
+    }
+
+    if ($oldversion < 2019100102) {
+
         // Define index courseidname (unique) to be added to tool_roland04.
+        $table = new xmldb_table('tool_roland04');
         $index = new xmldb_index('courseidname', XMLDB_INDEX_UNIQUE, ['courseid', 'name']);
 
         // Conditionally launch add index courseidname.
@@ -79,6 +86,8 @@ function xmldb_tool_roland04_upgrade(int $oldversion) {
         }
 
         // Roland04 savepoint reached.
-        upgrade_plugin_savepoint(true, 2019100101, 'tool', 'roland04');
+        upgrade_plugin_savepoint(true, 2019100102, 'tool', 'roland04');
     }
+
+    return true;
 }

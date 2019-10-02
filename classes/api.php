@@ -57,4 +57,20 @@ class tool_roland04_api {
     public static function bootstrap_badge(string $text, string $bscolor): string {
         return html_writer::span($text, 'badge badge-'.$bscolor);
     }
+
+    /**
+     * Generates dump data
+     *
+     * @param int $i
+     * @param int $courseid
+     * @return bool true correct / false error
+     */
+    // public static function generate_todos(int $q, int $courseid): bool {
+    //     for ($i=0; $i < $q; $i++) { 
+    //         $newtodo = [
+    //             'courseid' = $courseid,
+    //             ''
+    //         ]
+    //     }
+    // }
 }

@@ -22,13 +22,24 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- $capabilities = array(
-    'mod/folder:managefiles' => array(
+defined('MOODLE_INTERNAL') || die();
+
+$capabilities = array(
+    'tool/roland04:view' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'student' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW
+        )
+    ),
+    'tool/roland04:edit' => array(
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
-        'contextlevel' => CONTEXT_MODULE,
+        'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW
         )
     ),
- );
+);
