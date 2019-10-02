@@ -46,10 +46,10 @@ class tool_roland04_table extends table_sql {
         parent::__construct($uniqueid);
 
         $this->set_attribute('id', 'tool_roland04_general');
-        $columns = array('name', 'completed', 'priority', 'timecreated', 'timemodified');
+        $columns = array('completed', 'name', 'priority', 'timecreated', 'timemodified');
         $headers = array(
+            '',
             get_string('name', 'tool_roland04'),
-            get_string('completed', 'tool_roland04'),
             get_string('priority', 'tool_roland04'),
             get_string('timecreated', 'tool_roland04'),
             get_string('timemodified', 'tool_roland04'),
@@ -83,7 +83,7 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_completed($row) {
-        return $row->completed ? tool_roland04_api::bootstrap_badge(get_string('yes'), "success") : tool_roland04_api::bootstrap_badge(get_string('no'), "danger");
+        return tool_roland04_api::completion_icon($row->completed);
     }
 
     /**
@@ -93,7 +93,7 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_priority($row) {
-        return $row->priority ? tool_roland04_api::bootstrap_badge(get_string('yes'), "success") : tool_roland04_api::bootstrap_badge(get_string('no'), "danger");
+        return $row->priority ? tool_roland04_api::bootstrap_badge(get_string('yes'), "danger") : tool_roland04_api::bootstrap_badge(get_string('no'), "secondary");
     }
 
     /**

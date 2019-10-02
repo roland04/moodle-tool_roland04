@@ -59,6 +59,17 @@ class tool_roland04_api {
     }
 
     /**
+     * Generates FA Checkbox icon
+     *
+     * @param int $completed
+     * @return string HTML code for the icon
+     */
+    public static function completion_icon(int $completed): string {
+        $iconclass = $completed ? 'fa-check-square' : 'fa-square';
+        return html_writer::tag('i', '', ['class' => 'icon fa '.$iconclass]);
+    }
+
+    /**
      * Generates dump data
      *
      * @param int $q number of todos to generate
