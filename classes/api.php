@@ -63,14 +63,23 @@ class tool_roland04_api {
      *
      * @param int $i
      * @param int $courseid
-     * @return bool true correct / false error
      */
-    // public static function generate_todos(int $q, int $courseid): bool {
-    //     for ($i=0; $i < $q; $i++) { 
-    //         $newtodo = [
-    //             'courseid' = $courseid,
-    //             ''
-    //         ]
-    //     }
-    // }
+    public static function generate_todos(int $q, int $courseid) {
+        global $DB;
+
+        $currenttime = time();
+        $newtodos = array();
+        for ($i=0; $i < $q; $i++) { 
+            $newtodo = [
+                'courseid' => $courseid,
+                'name' => "TODO-".rand()."-".$i,
+                'completed' => rand(0,1),
+                'priority' => rand(0,1),
+                'timecreated' => $currenttime,
+                'timemodified' => $currenttime
+            ];
+            $newtodos[] = $newtodo;
+        }
+        $DB->insert_records('tool_roland04', $newtodos);
+    }
 }

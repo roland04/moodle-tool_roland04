@@ -43,6 +43,9 @@ $PAGE->navbar->add($pagetitle);
 echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
 
+// Generate TODOs
+tool_roland04_api::generate_todos(1,$course->id);
+
 // Show general table.
 $table = new tool_roland04_table('tool_roland04', $course->id);
 $table->out(25, false);
