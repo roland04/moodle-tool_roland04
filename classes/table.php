@@ -129,7 +129,7 @@ class tool_roland04_table extends table_sql {
     protected function col_actions($row) {
         $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]), 
                 html_writer::tag('i', '', ['class' => 'icon fa fa-pencil']));
-        $deletelink = html_writer::link(new moodle_url('./edit.php', ['delete' => $row->id]), 
+        $deletelink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id, 'delete' => 1]), 
                 html_writer::tag('i', '', ['class' => 'icon fa fa-trash']));
         return $editlink.$deletelink;
     }

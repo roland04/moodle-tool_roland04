@@ -26,9 +26,7 @@ require_once(__DIR__ . '/../../../config.php');
 
 global $DB;
 
-$id = optional_param('id', 0, PARAM_INT);
-
-if ($id) {
+if ($id = optional_param('id', 0, PARAM_INT)) {
     $todo = $DB->get_record('tool_roland04', ['id' => $id], '*' , MUST_EXIST);
     $courseid = $todo->courseid;
     $pagetitle = get_string('edittodo', 'tool_roland04');
@@ -40,12 +38,19 @@ if ($id) {
 }
 
 $course = get_course($courseid);
-$toform->courseid = $courseid;
 
 require_login();
 $context = context_course::instance($courseid);
 require_capability('tool/roland04:edit', $context);
 
+$returnurl = new moodle_url('/admin/tool/roland04/index.php', ['courseid' => $courseid]);
+
+if ($delete = optional_param('delete', 0, PARAM_INT)){
+    $DB->delete_records('tool_roland04', ['id' => $todo->id]);
+    redirect($returnurl);
+}
+
+$toform->courseid = $courseid;
 $url = new moodle_url('/admin/tool/roland04/edit.php');
 $pagetitle = get_string('addtodo', 'tool_roland04');
 
@@ -62,7 +67,7 @@ $mform->set_data($toform);
 $returnurl = new moodle_url('/admin/tool/roland04/index.php', ['courseid' => $courseid]);
 if ($mform->is_cancelled()) {
     redirect($returnurl);
-} else if ($data = $mform->get_data()) {
+} else if (($data = $mform->get_data()) && confirm_sesskey()) {
     if ($id) {
         // Update todo.
         $data->timemodified = time();
