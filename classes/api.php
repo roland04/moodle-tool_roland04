@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 define('ICON_CHECKED', 'fa-check-square');
-define('ICON_UNCHECKED', 'fa-check-square');
+define('ICON_UNCHECKED', 'fa-square');
 define('BADGE_GREY', 'badge-secondary');
 define('BADGE_ORANGE', 'badge-warning');
 define('BADGE_RED', 'badge-danger');
