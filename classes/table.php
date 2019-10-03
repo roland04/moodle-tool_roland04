@@ -63,7 +63,7 @@ class tool_roland04_table extends table_sql {
         $this->define_headers($headers);
         $this->pageable(true);
         $this->collapsible(false);
-        $this->sortable(false);
+        $this->sortable(true);
         $this->is_downloadable(false);
         $this->define_baseurl($PAGE->url);
         $this->set_sql('id, name, completed, priority, timecreated, timemodified', '{tool_roland04}', 'courseid = :courseid',
@@ -129,7 +129,7 @@ class tool_roland04_table extends table_sql {
     protected function col_actions($row) {
         $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]), 
                 html_writer::tag('i', '', ['class' => 'icon fa fa-pencil']));
-        $deletelink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id, 'delete' => 1]), 
+        $deletelink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id, 'delete' => 1, 'sesskey' => sesskey()]), 
                 html_writer::tag('i', '', ['class' => 'icon fa fa-trash']));
         return $editlink.$deletelink;
     }
