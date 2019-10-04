@@ -34,6 +34,7 @@ $string['timemodified'] = 'Time modified';
 $string['viewtodos'] = 'View TODOs';
 $string['addtodo'] = 'Add new TODO';
 $string['edittodo'] = 'Edit TODO';
+$string['deletetodo'] = 'Delete TODO';
 $string['errornameexists'] = 'Name already exists in this course';
 $string['priority2'] = 'High';
 $string['priority1'] = 'Medium';

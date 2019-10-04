@@ -45,7 +45,7 @@ require_capability('tool/roland04:edit', $context);
 
 $returnurl = new moodle_url('/admin/tool/roland04/index.php', ['courseid' => $courseid]);
 
-if ($delete = optional_param('delete', 0, PARAM_INT)){
+if ($delete = optional_param('delete', 0, PARAM_INT)) {
     require_sesskey();
     $DB->delete_records('tool_roland04', ['id' => $todo->id]);
     redirect($returnurl);

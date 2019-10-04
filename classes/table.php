@@ -49,21 +49,22 @@ class tool_roland04_table extends table_sql {
         $columns = array('completed', 'name', 'priority', 'timecreated', 'timemodified');
         if (has_capability('tool/roland04:edit', context_course::instance($courseid))) {
             $columns[] = 'actions';
+            $this->no_sorting('actions');
         }
         $headers = array(
-            '',
+            get_string('completed', 'tool_roland04'),
             get_string('name', 'tool_roland04'),
             get_string('priority', 'tool_roland04'),
             get_string('timecreated', 'tool_roland04'),
             get_string('timemodified', 'tool_roland04'),
-            ''
+            get_string('actions')
         );
 
         $this->define_columns($columns);
         $this->define_headers($headers);
         $this->pageable(true);
         $this->collapsible(false);
-        $this->sortable(true);
+        $this->sortable(true, 'timemodified', 'DESC');
         $this->is_downloadable(false);
         $this->define_baseurl($PAGE->url);
         $this->set_sql('id, name, completed, priority, timecreated, timemodified', '{tool_roland04}', 'courseid = :courseid',
@@ -127,10 +128,16 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_actions($row) {
-        $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]), 
-                html_writer::tag('i', '', ['class' => 'icon fa fa-pencil']));
-        $deletelink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id, 'delete' => 1, 'sesskey' => sesskey()]), 
-                html_writer::tag('i', '', ['class' => 'icon fa fa-trash']));
+        $edittext = get_string('edittodo', 'tool_roland04');
+        $deletetext = get_string('deletetodo', 'tool_roland04');
+        $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]),
+                html_writer::tag('i', '', ['class' => 'icon fa fa-pencil todo-edit-link', 'title' => $edittext, 'aria-label' => $edittext]),
+                ['aria-label' => $edittext]
+            );
+        $deletelink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id, 'delete' => 1, 'sesskey' => sesskey()]),
+                html_writer::tag('i', '', ['class' => 'icon fa fa-trash todo-delete-link', 'title' => $deletetext, 'aria-label' => $deletetext]),
+                ['aria-label' => $deletetext]
+            );
         return $editlink.$deletelink;
     }
 }
