@@ -98,4 +98,47 @@ class tool_roland04_api {
         }
         $DB->insert_records('tool_roland04', $newtodos);
     }
+
+    /**
+     * Get a TODO
+     *
+     * @param int $id TODO id to retrieve
+     * @return stdClass|bool retrieved TODO or false if not found
+     */
+    public static function get_todo(int $id): stdClass {
+        global $DB;
+        return $DB->get_record('tool_roland04', ['id' => $id], '*', MUST_EXIST);
+    }
+
+    /**
+     * Create a TODO
+     *
+     * @param stdClass $data data to create TODO
+     */
+    public static function create_todo(stdClass $data) {
+        global $DB;
+        $data->timecreated = $data->timemodified = time();
+        $DB->insert_record('tool_roland04', $data);
+    }
+
+    /**
+     * Update a TODO
+     *
+     * @param stdClass $data data to update TODO
+     */
+    public static function update_todo(stdClass $data) {
+        global $DB;
+        $data->timemodified = time();
+        $DB->update_record('tool_roland04', $data);
+    }
+
+    /**
+     * Delete a TODO
+     *
+     * @param int $id TODO id to delete
+     */
+    public static function delete_todo(int $id) {
+        global $DB;
+        $DB->delete_records('tool_roland04', ['id' => $id]);
+    }
 }

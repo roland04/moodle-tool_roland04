@@ -27,7 +27,7 @@ require_once(__DIR__ . '/../../../config.php');
 global $DB;
 
 if ($id = optional_param('id', 0, PARAM_INT)) {
-    $todo = $DB->get_record('tool_roland04', ['id' => $id], '*' , MUST_EXIST);
+    $todo = tool_roland04_api::get_todo($id);
     $courseid = $todo->courseid;
     $pagetitle = get_string('edittodo', 'tool_roland04');
     $toform = $todo;
@@ -47,7 +47,7 @@ $returnurl = new moodle_url('/admin/tool/roland04/index.php', ['courseid' => $co
 
 if ($delete = optional_param('delete', 0, PARAM_INT)) {
     require_sesskey();
-    $DB->delete_records('tool_roland04', ['id' => $todo->id]);
+    tool_roland04_api::delete_todo($todo->id);
     redirect($returnurl);
 }
 
@@ -71,12 +71,10 @@ if ($mform->is_cancelled()) {
 } else if (($data = $mform->get_data()) && confirm_sesskey()) {
     if ($id) {
         // Update todo.
-        $data->timemodified = time();
-        $DB->update_record('tool_roland04', $data);
+        tool_roland04_api::update_todo($data);
     } else {
         // New todo.
-        $data->timecreated = $data->timemodified = time();
-        $DB->insert_record('tool_roland04', $data);
+        tool_roland04_api::create_todo($data);
     }
     redirect($returnurl);
 }
