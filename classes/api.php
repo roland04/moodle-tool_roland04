@@ -103,6 +103,7 @@ class tool_roland04_api {
      * Get a TODO
      *
      * @param int $id TODO id to retrieve
+     * @param int $strictness
      * @return stdClass|bool retrieved TODO or false if not found
      */
     public static function get_todo(int $id, int $strictness = MUST_EXIST) {
