@@ -45,12 +45,14 @@ class tool_roland04_form extends moodleform {
 
         $mform->addElement('text', 'name', get_string('name'));
         $mform->setType('name', PARAM_NOTAGS);
+        $mform->addRule('name', get_string('required'), 'required', null, 'client');
 
         $mform->addElement('advcheckbox', 'completed', get_string('completed', 'tool_roland04'));
         $mform->setType('completed', PARAM_NOTAGS);
         $mform->setDefault('completed', 0);
 
-        $priorityoptions = [get_string('priority0', 'tool_roland04'), get_string('priority1', 'tool_roland04'), get_string('priority2', 'tool_roland04')];
+        $priorityoptions = [get_string('priority0', 'tool_roland04'), get_string('priority1', 'tool_roland04'), 
+                get_string('priority2', 'tool_roland04')];
         $mform->addElement('select', 'priority', get_string('priority', 'tool_roland04'), $priorityoptions);
 
         $mform->addElement('hidden', 'courseid');

@@ -48,7 +48,8 @@ echo $OUTPUT->heading($pagetitle);
 // Show "Create TODO" button.
 if (has_capability('tool/roland04:edit', $context)) {
     echo $OUTPUT->box_start();
-    echo $OUTPUT->single_button(new moodle_url('./edit.php', ['courseid' => $courseid]), get_string('addtodo', 'tool_roland04'), 'get');
+    echo $OUTPUT->single_button(new moodle_url('./edit.php',
+            ['courseid' => $courseid]), get_string('addtodo', 'tool_roland04'), 'get');
     echo $OUTPUT->box_end();
 }
 

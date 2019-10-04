@@ -129,13 +129,18 @@ class tool_roland04_table extends table_sql {
      */
     protected function col_actions($row) {
         $edittext = get_string('edittodo', 'tool_roland04');
+        $editicon = html_writer::tag('i', '',
+                ['class' => 'icon fa fa-pencil todo-edit-link', 'title' => $edittext, 'aria-label' => $edittext]);
         $deletetext = get_string('deletetodo', 'tool_roland04');
+        $deleteicon = html_writer::tag('i', '', 
+                ['class' => 'icon fa fa-trash todo-delete-link', 'title' => $deletetext, 'aria-label' => $deletetext]);
+
         $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]),
-                html_writer::tag('i', '', ['class' => 'icon fa fa-pencil todo-edit-link', 'title' => $edittext, 'aria-label' => $edittext]),
+                $editicon,
                 ['aria-label' => $edittext]
             );
         $deletelink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id, 'delete' => 1, 'sesskey' => sesskey()]),
-                html_writer::tag('i', '', ['class' => 'icon fa fa-trash todo-delete-link', 'title' => $deletetext, 'aria-label' => $deletetext]),
+                $deleteicon,
                 ['aria-label' => $deletetext]
             );
         return $editlink.$deletelink;
