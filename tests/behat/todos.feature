@@ -39,7 +39,7 @@ Feature: Viewing TODO list
     And I should see "TODO-edited"
     And I should see "Low"
     When I click on "Delete TODO" "link"
-    Then I should not see "TODO-01"
+    Then I should not see "TODO-edited"
 
   Scenario: Accesing TODO List with student role
     When I log in as "testuser-02"
