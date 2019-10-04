@@ -39,8 +39,6 @@ class tool_roland04_form extends moodleform {
      * Form definition
      */
     public function definition() {
-        global $CFG;
-
         $mform = $this->_form;
 
         $mform->addElement('text', 'name', get_string('name'));

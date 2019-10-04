@@ -105,12 +105,10 @@ class tool_roland04_api {
      * @param int $id TODO id to retrieve
      * @return stdClass|bool retrieved TODO or false if not found
      */
-    public static function get_todo(int $id, int $strictness = MUST_EXIST): ?stdClass {
+    public static function get_todo(int $id, int $strictness = MUST_EXIST) {
         global $DB;
 
-        $todo = $DB->get_record('tool_roland04', ['id' => $id], '*', $strictness);
-
-        return $todo ? $todo : null;
+        return $DB->get_record('tool_roland04', ['id' => $id], '*', $strictness);
     }
 
     /**

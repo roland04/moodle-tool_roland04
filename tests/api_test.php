@@ -37,7 +37,7 @@ class tool_roland04_api_testcase extends advanced_testcase {
     /**
      * Test for tool_roland04::create_todo and tool_roland04::get_todo
      */
-    public function test_create_todo(){
+    public function test_create_todo() {
         // Create a course.
         $course = $this->getDataGenerator()->create_course();
 
@@ -49,20 +49,20 @@ class tool_roland04_api_testcase extends advanced_testcase {
         $data->completed = 0;
         $todoid = tool_roland04_api::create_todo($data);
 
-        // Get the TODO
+        // Get the TODO.
         $todo = tool_roland04_api::get_todo($todoid);
 
         // Test if TODO was created correctly.
-        $this->assertEquals($todo->courseid,$course->id);
-        $this->assertEquals($todo->name,$data->name);
+        $this->assertEquals($todo->courseid, $course->id);
+        $this->assertEquals($todo->name, $data->name);
         $this->assertEquals($todo->priority, $data->priority);
         $this->assertEquals($todo->completed, $data->completed);
     }
-    
+
     /**
      * Test for tool_roland04::update_todo
      */
-    public function test_update_todo(){
+    public function test_update_todo() {
         // Create a course.
         $course = $this->getDataGenerator()->create_course();
 
