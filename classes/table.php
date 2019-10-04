@@ -132,7 +132,7 @@ class tool_roland04_table extends table_sql {
         $editicon = html_writer::tag('i', '',
                 ['class' => 'icon fa fa-pencil todo-edit-link', 'title' => $edittext, 'aria-label' => $edittext]);
         $deletetext = get_string('deletetodo', 'tool_roland04');
-        $deleteicon = html_writer::tag('i', '', 
+        $deleteicon = html_writer::tag('i', '',
                 ['class' => 'icon fa fa-trash todo-delete-link', 'title' => $deletetext, 'aria-label' => $deletetext]);
 
         $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]),

@@ -51,7 +51,7 @@ class tool_roland04_form extends moodleform {
         $mform->setType('completed', PARAM_NOTAGS);
         $mform->setDefault('completed', 0);
 
-        $priorityoptions = [get_string('priority0', 'tool_roland04'), get_string('priority1', 'tool_roland04'), 
+        $priorityoptions = [get_string('priority0', 'tool_roland04'), get_string('priority1', 'tool_roland04'),
                 get_string('priority2', 'tool_roland04')];
         $mform->addElement('select', 'priority', get_string('priority', 'tool_roland04'), $priorityoptions);
 
