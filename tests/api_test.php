@@ -25,7 +25,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Functional test for class tool_roland04_api
+ * Class tool_roland04_api
+ *
+ * @package    tool_roland04
+ * @copyright  2019 Mikel Martín
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tool_roland04_api_testcase extends advanced_testcase {
 
