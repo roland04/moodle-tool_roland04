@@ -47,7 +47,7 @@ class tool_roland04_api {
     public static function get_textfieldoptions(): array {
         global $PAGE;
 
-        return array('trusttext' => true, 'subdirs' => true, 'maxfiles'=> -1, 'maxbytes'=> 0, 'context' => $PAGE->context);
+        return array('trusttext' => true, 'subdirs' => true, 'maxfiles' => -1, 'maxbytes' => 0, 'context' => $PAGE->context);
     }
 
     /**
