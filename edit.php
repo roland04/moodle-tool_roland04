@@ -24,9 +24,10 @@
 
 require_once(__DIR__ . '/../../../config.php');
 
-global $DB;
+global $DB, $PAGE;
 
 if ($id = optional_param('id', 0, PARAM_INT)) {
+    // If there is an id parameter, we get the TODO first, and then courseid.
     $todo = tool_roland04_api::get_todo($id);
     $courseid = $todo->courseid;
     $pagetitle = get_string('edittodo', 'tool_roland04');
@@ -38,6 +39,7 @@ if ($id = optional_param('id', 0, PARAM_INT)) {
 }
 
 $course = get_course($courseid);
+$toform->courseid = $courseid;
 
 require_login();
 $context = context_course::instance($courseid);
@@ -51,7 +53,6 @@ if ($delete = optional_param('delete', 0, PARAM_INT)) {
     redirect($returnurl);
 }
 
-$toform->courseid = $courseid;
 $url = new moodle_url('/admin/tool/roland04/edit.php');
 $pagetitle = get_string('addtodo', 'tool_roland04');
 
@@ -63,6 +64,12 @@ $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add($pagetitle);
 
 $mform = new tool_roland04_form();
+
+$textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+if (isset($todo)){
+    file_prepare_standard_editor($todo, 'description', $textfieldoptions, $PAGE->context, 'tool_roland04', 'todo', $todo->id);
+}
+
 $mform->set_data($toform);
 
 $returnurl = new moodle_url('/admin/tool/roland04/index.php', ['courseid' => $courseid]);

@@ -46,7 +46,7 @@ class tool_roland04_table extends table_sql {
         parent::__construct($uniqueid);
 
         $this->set_attribute('id', 'tool_roland04_general');
-        $columns = array('completed', 'name', 'priority', 'timecreated', 'timemodified');
+        $columns = array('completed', 'name', 'priority', 'description', 'timecreated', 'timemodified');
         if (has_capability('tool/roland04:edit', context_course::instance($courseid))) {
             $columns[] = 'actions';
             $this->no_sorting('actions');
@@ -55,6 +55,7 @@ class tool_roland04_table extends table_sql {
             get_string('completed', 'tool_roland04'),
             get_string('name', 'tool_roland04'),
             get_string('priority', 'tool_roland04'),
+            get_string('description', 'tool_roland04'),
             get_string('timecreated', 'tool_roland04'),
             get_string('timemodified', 'tool_roland04'),
             get_string('actions')
@@ -65,9 +66,10 @@ class tool_roland04_table extends table_sql {
         $this->pageable(true);
         $this->collapsible(false);
         $this->sortable(true, 'timemodified', 'DESC');
+        $this->no_sorting('description');
         $this->is_downloadable(false);
         $this->define_baseurl($PAGE->url);
-        $this->set_sql('id, name, completed, priority, timecreated, timemodified', '{tool_roland04}', 'courseid = :courseid',
+        $this->set_sql('id, name, completed, priority, description, descriptionformat, timecreated, timemodified', '{tool_roland04}', 'courseid = :courseid',
                 ['courseid' => $courseid]);
     }
 
@@ -99,6 +101,21 @@ class tool_roland04_table extends table_sql {
      */
     protected function col_priority($row) {
         return tool_roland04_api::print_priority_badge($row->priority);
+    }
+
+    /**
+     * Generates column description
+     *
+     * @param stdClass $row
+     * @return string
+     */
+    protected function col_description($row) {
+        global $PAGE;
+
+        $textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+        $description = file_rewrite_pluginfile_urls($row->description, 'pluginfile.php', $PAGE->context->id, 'tool_roland04', 'todo', $row->id, $textfieldoptions);
+        
+        return format_text($description, $row->descriptionformat, $textfieldoptions);
     }
 
     /**

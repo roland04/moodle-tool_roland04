@@ -14,6 +14,7 @@ Feature: Viewing TODO list
     | testuser-01 | AE      | editingteacher  |
     | testuser-02 | AE      | student      	  |
 
+  @javascript
   Scenario: Creating TODO List with editingteacher role
     When I log in as "testuser-01"
     And I am on "Activity examples" course homepage with editing mode on
@@ -24,20 +25,28 @@ Feature: Viewing TODO list
     And I set the following fields to these values:
     | Name | TODO-01 |
     | Priority | 2 |
+    | Completed | 1 |
+    | Description | Description-A |
     And I press "Save changes"
     Then I should see "View TODOs"
     And I should see "TODO-01"
     And I should see "High"
+    And I should see "Description-A"
+    And "Completed" "icon" should exist
     And "Edit TODO" "icon" should exist
     And "Delete TODO" "icon" should exist
     When I click on "Edit TODO" "link"
     And I set the following fields to these values:
     | Name | TODO-edited |
     | Priority | 0 |
+    | Description | Description-edited |
     And I press "Save changes"
     Then I should not see "TODO-01"
     And I should see "TODO-edited"
+    And I should not see "High"
     And I should see "Low"
+    And I should not see "Description-A"
+    And I should see "Description-edited"
     When I click on "Delete TODO" "link"
     Then I should not see "TODO-edited"
 

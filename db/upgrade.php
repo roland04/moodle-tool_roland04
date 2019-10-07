@@ -89,5 +89,35 @@ function xmldb_tool_roland04_upgrade(int $oldversion) {
         upgrade_plugin_savepoint(true, 2019100102, 'tool', 'roland04');
     }
 
+    if ($oldversion < 2019100700) {
+
+        // Define field description to be added to tool_roland04.
+        $table = new xmldb_table('tool_roland04');
+        $field = new xmldb_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null, 'priority');
+
+        // Conditionally launch add field description.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Roland04 savepoint reached.
+        upgrade_plugin_savepoint(true, 2019100700, 'tool', 'roland04');
+    }
+
+    if ($oldversion < 2019100701) {
+
+        // Define field descriptionformat to be added to tool_roland04.
+        $table = new xmldb_table('tool_roland04');
+        $field = new xmldb_field('descriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'description');
+
+        // Conditionally launch add field descriptionformat.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Roland04 savepoint reached.
+        upgrade_plugin_savepoint(true, 2019100701, 'tool', 'roland04');
+    }
+
     return true;
 }

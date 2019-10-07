@@ -39,6 +39,8 @@ class tool_roland04_form extends moodleform {
      * Form definition
      */
     public function definition() {
+        global $PAGE;
+
         $mform = $this->_form;
 
         $mform->addElement('text', 'name', get_string('name'));
@@ -46,12 +48,15 @@ class tool_roland04_form extends moodleform {
         $mform->addRule('name', get_string('required'), 'required', null, 'client');
 
         $mform->addElement('advcheckbox', 'completed', get_string('completed', 'tool_roland04'));
-        $mform->setType('completed', PARAM_NOTAGS);
+        $mform->setType('completed', PARAM_INT);
         $mform->setDefault('completed', 0);
 
         $priorityoptions = [get_string('priority0', 'tool_roland04'), get_string('priority1', 'tool_roland04'),
                 get_string('priority2', 'tool_roland04')];
         $mform->addElement('select', 'priority', get_string('priority', 'tool_roland04'), $priorityoptions);
+
+        $textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+        $mform->addElement('editor', 'description_editor', get_string('description', 'tool_roland04'), null, $textfieldoptions);
 
         $mform->addElement('hidden', 'courseid');
         $mform->setType('courseid', PARAM_INT);

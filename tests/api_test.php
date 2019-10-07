@@ -51,6 +51,7 @@ class tool_roland04_api_testcase extends advanced_testcase {
         $data->name = 'todo1';
         $data->priority = 0;
         $data->completed = 0;
+        $data->description = 'desc';
         $todoid = tool_roland04_api::create_todo($data);
 
         // Get the TODO.
@@ -61,6 +62,7 @@ class tool_roland04_api_testcase extends advanced_testcase {
         $this->assertEquals($todo->name, $data->name);
         $this->assertEquals($todo->priority, $data->priority);
         $this->assertEquals($todo->completed, $data->completed);
+        $this->assertEquals($todo->description, $data->description);
     }
 
     /**
@@ -76,16 +78,19 @@ class tool_roland04_api_testcase extends advanced_testcase {
         $data->name = 'todo1';
         $data->priority = 0;
         $data->completed = 0;
+        $data->description = 'desc';
         $todoid = tool_roland04_api::create_todo($data);
 
         // Update the TODO.
-        tool_roland04_api::update_todo((object)['id' => $todoid, 'name' => 'todo2']);
+        tool_roland04_api::update_todo((object)['id' => $todoid, 'name' => 'todo2', 'completed' => 1, 'description' => 'desc2']);
 
         // Get the TODO.
         $todo = tool_roland04_api::get_todo($todoid);
 
         // Test if TODO was created correctly.
         $this->assertEquals($todo->name, 'todo2');
+        $this->assertEquals($todo->completed, 1);
+        $this->assertEquals($todo->description, 'desc2');
     }
 
     /**
@@ -99,8 +104,6 @@ class tool_roland04_api_testcase extends advanced_testcase {
         $data = new stdClass();
         $data->courseid = $course->id;
         $data->name = 'todo1';
-        $data->priority = 0;
-        $data->completed = 0;
         $todoid = tool_roland04_api::create_todo($data);
 
         // Delete the TODO.

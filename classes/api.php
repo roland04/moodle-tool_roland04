@@ -71,7 +71,8 @@ class tool_roland04_api {
      */
     public static function print_completion_icon(int $completed): string {
         $iconclass = $completed ? ICON_CHECKED : ICON_UNCHECKED;
-        return html_writer::tag('i', '', ['class' => 'icon fa '.$iconclass]);
+        $icontext = $completed ? get_string('completed', 'tool_roland04') : get_string('uncompleted', 'tool_roland04');
+        return html_writer::tag('i', '', ['class' => 'icon fa '.$iconclass, 'title' => $icontext, 'aria-label' => $icontext]);
     }
 
     /**
@@ -91,6 +92,9 @@ class tool_roland04_api {
                 'name' => "TODO-".rand()."-".$i,
                 'completed' => rand(0, 1),
                 'priority' => rand(0, 1),
+                'description' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                'descriptionformat' => 1,
                 'timecreated' => $currenttime,
                 'timemodified' => $currenttime
             ];
@@ -119,10 +123,16 @@ class tool_roland04_api {
      * @return int $id id of the TODO created
      */
     public static function create_todo(stdClass $data): int {
-        global $DB;
+        global $DB, $PAGE;
 
         $data->timecreated = $data->timemodified = time();
         $id = $DB->insert_record('tool_roland04', $data);
+
+        $textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+        if (isset($data->description_editor)) {
+            $data = file_postupdate_standard_editor($data, 'description', $textfieldoptions, $PAGE->context, 'tool_roland04', 'todo', $id);
+        }
+        $DB->update_record('tool_roland04', ['id' => $id, 'description' => $data->description]);
 
         return $id;
     }
@@ -133,7 +143,12 @@ class tool_roland04_api {
      * @param stdClass $data data to update TODO
      */
     public static function update_todo(stdClass $data) {
-        global $DB;
+        global $DB, $PAGE;
+
+        $textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+        if (isset($data->description_editor)) {
+            $data = file_postupdate_standard_editor($data, 'description', $textfieldoptions, $PAGE->context, 'tool_roland04', 'todo', $data->id);
+        }
 
         $data->timemodified = time();
         $DB->update_record('tool_roland04', $data);
