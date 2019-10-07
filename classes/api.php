@@ -47,7 +47,7 @@ class tool_roland04_api {
     public static function get_textfieldoptions(): array {
         global $PAGE;
 
-        return array('trusttext' => true, 'subdirs' => true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context' => $PAGE->context);
+        return array('trusttext' => true, 'subdirs' => true, 'maxfiles'=> -1, 'maxbytes'=> 0, 'context' => $PAGE->context);
     }
 
     /**
@@ -141,10 +141,10 @@ class tool_roland04_api {
 
         $textfieldoptions = self::get_textfieldoptions();
         if (isset($data->description_editor)) {
-            $data = file_postupdate_standard_editor($data, 'description', $textfieldoptions, 
+            $data = file_postupdate_standard_editor($data, 'description', $textfieldoptions,
                     $PAGE->context, 'tool_roland04', 'todo', $id);
+            $DB->update_record('tool_roland04', ['id' => $id, 'description' => $data->description]);
         }
-        $DB->update_record('tool_roland04', ['id' => $id, 'description' => $data->description]);
 
         return $id;
     }
@@ -159,7 +159,7 @@ class tool_roland04_api {
 
         $textfieldoptions = self::get_textfieldoptions();
         if (isset($data->description_editor)) {
-            $data = file_postupdate_standard_editor($data, 'description', $textfieldoptions, 
+            $data = file_postupdate_standard_editor($data, 'description', $textfieldoptions,
                     $PAGE->context, 'tool_roland04', 'todo', $data->id);
         }
 

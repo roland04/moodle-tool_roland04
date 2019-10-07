@@ -39,7 +39,6 @@ class tool_roland04_form extends moodleform {
      * Form definition
      */
     public function definition() {
-        global $PAGE;
 
         $mform = $this->_form;
 

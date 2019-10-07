@@ -69,7 +69,7 @@ class tool_roland04_table extends table_sql {
         $this->no_sorting('description');
         $this->is_downloadable(false);
         $this->define_baseurl($PAGE->url);
-        $this->set_sql('id, name, completed, priority, description, descriptionformat, timecreated, 
+        $this->set_sql('id, name, completed, priority, description, descriptionformat, timecreated,
                 timemodified', '{tool_roland04}', 'courseid = :courseid', ['courseid' => $courseid]);
     }
 
@@ -113,9 +113,9 @@ class tool_roland04_table extends table_sql {
         global $PAGE;
 
         $textfieldoptions = tool_roland04_api::get_textfieldoptions();
-        $description = file_rewrite_pluginfile_urls($row->description, 'pluginfile.php', 
+        $description = file_rewrite_pluginfile_urls($row->description, 'pluginfile.php',
                 $PAGE->context->id, 'tool_roland04', 'todo', $row->id, $textfieldoptions);
-        
+
         return format_text($description, $row->descriptionformat, $textfieldoptions);
     }
 

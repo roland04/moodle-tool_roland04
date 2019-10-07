@@ -66,7 +66,7 @@ $PAGE->navbar->add($pagetitle);
 $mform = new tool_roland04_form();
 
 $textfieldoptions = tool_roland04_api::get_textfieldoptions();
-if (isset($todo)){
+if (isset($todo)) {
     file_prepare_standard_editor($todo, 'description', $textfieldoptions, $PAGE->context, 'tool_roland04', 'todo', $todo->id);
 }
 
