@@ -65,7 +65,7 @@ $PAGE->navbar->add($pagetitle);
 
 $mform = new tool_roland04_form();
 
-$textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+$textfieldoptions = tool_roland04_api::get_textfieldoptions();
 if (isset($todo)){
     file_prepare_standard_editor($todo, 'description', $textfieldoptions, $PAGE->context, 'tool_roland04', 'todo', $todo->id);
 }

@@ -112,7 +112,7 @@ class tool_roland04_table extends table_sql {
     protected function col_description($row) {
         global $PAGE;
 
-        $textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+        $textfieldoptions = tool_roland04_api::get_textfieldoptions();
         $description = file_rewrite_pluginfile_urls($row->description, 'pluginfile.php', $PAGE->context->id, 'tool_roland04', 'todo', $row->id, $textfieldoptions);
         
         return format_text($description, $row->descriptionformat, $textfieldoptions);

@@ -40,6 +40,17 @@ define('BADGE_RED', 'badge-danger');
 class tool_roland04_api {
 
     /**
+     * Get the form editor textfieldoptions
+     *
+     * @return array HTML code for the icon
+     */
+    public static function get_textfieldoptions(): array {
+        global $PAGE;
+
+        return array('trusttext' => true, 'subdirs' => true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context' => $PAGE->context);
+    }
+
+    /**
      * Generates Boostrap Badge HTML code
      *
      * @param string $priority text for the badge
@@ -128,7 +139,7 @@ class tool_roland04_api {
         $data->timecreated = $data->timemodified = time();
         $id = $DB->insert_record('tool_roland04', $data);
 
-        $textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+        $textfieldoptions = self::get_textfieldoptions();
         if (isset($data->description_editor)) {
             $data = file_postupdate_standard_editor($data, 'description', $textfieldoptions, $PAGE->context, 'tool_roland04', 'todo', $id);
         }
@@ -145,7 +156,7 @@ class tool_roland04_api {
     public static function update_todo(stdClass $data) {
         global $DB, $PAGE;
 
-        $textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+        $textfieldoptions = self::get_textfieldoptions();
         if (isset($data->description_editor)) {
             $data = file_postupdate_standard_editor($data, 'description', $textfieldoptions, $PAGE->context, 'tool_roland04', 'todo', $data->id);
         }

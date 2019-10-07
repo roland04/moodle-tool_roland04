@@ -55,7 +55,7 @@ class tool_roland04_form extends moodleform {
                 get_string('priority2', 'tool_roland04')];
         $mform->addElement('select', 'priority', get_string('priority', 'tool_roland04'), $priorityoptions);
 
-        $textfieldoptions = array('trusttext'=>true, 'subdirs'=>true, 'maxfiles'=>-1, 'maxbytes'=>0, 'context'=>$PAGE->context);
+        $textfieldoptions = tool_roland04_api::get_textfieldoptions();
         $mform->addElement('editor', 'description_editor', get_string('description', 'tool_roland04'), null, $textfieldoptions);
 
         $mform->addElement('hidden', 'courseid');
