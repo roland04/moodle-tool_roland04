@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'tool_roland04';
-$plugin->version = '2019100702';
+$plugin->version = '2019100801';
 $plugin->requires = '2018051708';
-$plugin->maturity = MATURITY_ALPHA;
-$plugin->release = '2.1';
+$plugin->maturity = MATURITY_BETA;
+$plugin->release = '2.2';
