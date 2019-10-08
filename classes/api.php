@@ -84,34 +84,6 @@ class tool_roland04_api {
     }
 
     /**
-     * Generates dump data
-     *
-     * @param int $q number of todos to generate
-     * @param int $courseid
-     */
-    public static function generate_todos(int $q, int $courseid) {
-        global $DB;
-
-        $currenttime = time();
-        $newtodos = array();
-        for ($i = 0; $i < $q; $i++) {
-            $newtodo = [
-                'courseid' => $courseid,
-                'name' => "TODO-".rand()."-".$i,
-                'completed' => rand(0, 1),
-                'priority' => rand(0, 1),
-                'description' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                'descriptionformat' => 1,
-                'timecreated' => $currenttime,
-                'timemodified' => $currenttime
-            ];
-            $newtodos[] = $newtodo;
-        }
-        $DB->insert_records('tool_roland04', $newtodos);
-    }
-
-    /**
      * Get a TODO
      *
      * @param int $id TODO id to retrieve

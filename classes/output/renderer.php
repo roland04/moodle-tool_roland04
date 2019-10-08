@@ -34,6 +34,11 @@ use \tool_roland04\output\todo_list;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tool_roland04_renderer extends plugin_renderer_base {
+    /**
+     * @param todo_list $todolist
+     * @return bool|string
+     * @throws moodle_exception
+     */
     protected function render_todo_list(todo_list $todolist) {
         $data = $todolist->export_for_template($this);
         return parent::render_from_template('tool_roland04/todo_list', $data);

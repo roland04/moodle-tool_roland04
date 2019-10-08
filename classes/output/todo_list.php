@@ -72,9 +72,7 @@ class todo_list implements \renderable, \templatable
 
         // Generate "Add TODO" button.
         if (has_capability('tool/roland04:edit', $context)) {
-            $addbutton = $output->box_start();
-            $addbutton .= $output->single_button(new moodle_url('./edit.php', ['courseid' => $this->courseid]), get_string('addtodo', 'tool_roland04'), 'get');
-            $addbutton .= $output->box_end();
+            $addbutton = $output->single_button(new moodle_url('./edit.php', ['courseid' => $this->courseid]), get_string('addtodo', 'tool_roland04'), 'get');
             $data->button = $addbutton;
         }
 

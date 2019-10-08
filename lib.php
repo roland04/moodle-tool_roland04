@@ -27,9 +27,9 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * This function extends the navigation with the tool
  *
- * @param \navigation_node $parentnode The navigation node to extend
+ * @param navigation_node $parentnode The navigation node to extend
  * @param stdClass $course The course to object for the report
- * @param \context_course $context The context of the course
+ * @param context_course $context The context of the course
  */
 function tool_roland04_extend_navigation_course(navigation_node $parentnode, stdClass $course, context_course $context) {
     if (has_capability('tool/roland04:view', $context)) {
@@ -45,7 +45,7 @@ function tool_roland04_extend_navigation_course(navigation_node $parentnode, std
  *
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
- * @param stdClass $context the context
+ * @param context $context the context
  * @param string $filearea the name of the file area
  * @param array $args extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download

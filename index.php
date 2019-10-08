@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_roland04\output\todo_list;
+
 require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 
@@ -42,11 +44,9 @@ $PAGE->set_url($url, array('courseid' => $courseid));
 $PAGE->set_title($course->shortname.': '.$pagetitle);
 $PAGE->set_heading($course->fullname);
 
-$outputpage = new \tool_roland04\output\todo_list($courseid);
+$outputpage = new todo_list($courseid);
 $output = $PAGE->get_renderer('tool_roland04');
 echo $output->header();
 echo $output->heading($pagetitle);
 echo $output->render($outputpage);
 echo $output->footer();
-
-echo $OUTPUT->footer();
