@@ -38,8 +38,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2019 Mikel Martín
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class todo_list implements \renderable, \templatable
-{
+class todo_list implements \renderable, \templatable {
 
     /**
      * models
@@ -54,8 +53,7 @@ class todo_list implements \renderable, \templatable
      * @param int $courseid
      * @return void
      */
-    public function __construct(int $courseid)
-    {
+    public function __construct(int $courseid) {
         $this->courseid = $courseid;
     }
 
@@ -65,14 +63,16 @@ class todo_list implements \renderable, \templatable
      * @param renderer_base $output
      * @return stdClass
      */
-    public function export_for_template(renderer_base $output)
-    {
+    public function export_for_template(renderer_base $output) {
         $data = new stdClass();
         $context = context_course::instance($this->courseid);
 
         // Generate "Add TODO" button.
         if (has_capability('tool/roland04:edit', $context)) {
-            $addbutton = $output->single_button(new moodle_url('./edit.php', ['courseid' => $this->courseid]), get_string('addtodo', 'tool_roland04'), 'get');
+            $addbutton = $output->single_button(new moodle_url('./edit.php',
+                ['courseid' => $this->courseid]),
+                get_string('addtodo', 'tool_roland04'),
+                'get');
             $data->button = $addbutton;
         }
 
