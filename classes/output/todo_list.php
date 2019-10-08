@@ -79,7 +79,7 @@ class todo_list implements \renderable, \templatable {
         // Generate the table.
         $todotable = new \tool_roland04_table('tool_roland04', $this->courseid);
         ob_start();
-        $todotable->out(25,false);
+        $todotable->out(25, false);
         $data->table = ob_get_clean();
 
         return $data;
