@@ -88,6 +88,8 @@ function tool_roland04_pluginfile($course, $cm, $context, $filearea, $args, $for
 }
 
 /**
+ * Inplace editable callback for tool_rolad04
+ *
  * @param $itemtype
  * @param $itemid
  * @param $newvalue
