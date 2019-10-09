@@ -42,3 +42,4 @@ $string['errornameexists'] = 'Name already exists in this course';
 $string['priority2'] = 'High';
 $string['priority1'] = 'Medium';
 $string['priority0'] = 'Low';
+$string['todocreated'] = 'TODO created';

@@ -115,6 +115,9 @@ class tool_roland04_api {
             $DB->update_record('tool_roland04', (object)['id' => $id, 'description' => $data->description]);
         }
 
+        $event = \tool_roland04\event\todo_created::create(array('context' => $PAGE->context, 'objectid' => $id));
+        $event->trigger();
+
         return $id;
     }
 
