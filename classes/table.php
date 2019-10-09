@@ -100,7 +100,15 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_priority($row) {
-        return tool_roland04_api::print_priority_badge($row->priority);
+        global $OUTPUT;
+//        return tool_roland04_api::print_priority_badge($row->priority);
+
+        $tagcollections =  [0 => 'Low', 1 => 'Medium', 2 => 'High'];
+        $tmpl = new \core\output\inplace_editable('tool_roland04', 'todopriority',
+            $row->id, has_capability('tool/roland04:edit', context_system::instance()),
+            tool_roland04_api::print_priority_badge($row->priority), $row->priority, '$edithint', '$editlabel');
+        $tmpl->set_type_select($tagcollections);
+        return $OUTPUT->render($tmpl);
     }
 
     /**

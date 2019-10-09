@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\output\inplace_editable;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -83,4 +85,31 @@ function tool_roland04_pluginfile($course, $cm, $context, $filearea, $args, $for
     }
 
     send_stored_file($file, 86400, 0, $forcedownload, $options);
+}
+
+/**
+ * @param $itemtype
+ * @param $itemid
+ * @param $newvalue
+ * @return inplace_editable
+ */
+function tool_roland04_inplace_editable($itemtype, $itemid, $newvalue) {
+    if ($itemtype === 'todopriority') {
+        global $DB;
+
+        $record = $DB->get_record('tool_roland04', array('id' => $itemid), '*', MUST_EXIST);
+        \external_api::validate_context(context_system::instance());
+        require_capability('tool/roland04:edit', context_system::instance());
+
+        $newvalue = clean_param($newvalue, PARAM_NOTAGS);
+        $DB->update_record('tool_roland04', (object)['id' => $itemid, 'priority' => $newvalue]);
+
+        $record->priority = $newvalue;
+
+        $tmpl = new inplace_editable('tool_roland04', 'todopriority', $record->id, true,
+            tool_roland04_api::print_priority_badge($record->priority), $record->priority, 'Edit mytest name',  'New value for ' . format_string($record->name));
+        $tagcollections =  [0 => 'Low', 1 => 'Medium', 2 => 'High'];
+        $tmpl->set_type_select($tagcollections);
+        return $tmpl;
+    }
 }

@@ -3,7 +3,7 @@ define(['jquery', 'core/str', 'core/notification'], function($, str, notificatio
         init: function() {
                 $(document).on('click', '[data-action=deletetodo]', function(e) {
                     e.preventDefault();
-                    let targetUrl = $(e.currentTarget).attr('href');
+                    var targetUrl = $(e.currentTarget).attr('href');
                     str.get_strings([
                         {
                             key:        'confirmation',
