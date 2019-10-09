@@ -48,6 +48,7 @@ Feature: Viewing TODO list
     And I should not see "Description-A"
     And I should see "Description-edited"
     When I click on "Delete TODO" "link"
+    And I click on "Yes" "button"
     Then I should not see "TODO-edited"
 
   Scenario: Accesing TODO List with student role
