@@ -155,11 +155,11 @@ class tool_roland04_table extends table_sql {
 
         $editlink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id]),
                 $editicon,
-                ['aria-label' => $edittext]
+                ['aria-label' => $edittext, 'data-action' => 'edittodo']
             );
         $deletelink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id, 'delete' => 1, 'sesskey' => sesskey()]),
                 $deleteicon,
-                ['aria-label' => $deletetext]
+                ['aria-label' => $deletetext, 'data-action' => 'deletetodo']
             );
         return $editlink.$deletelink;
     }
