@@ -101,7 +101,6 @@ class tool_roland04_table extends table_sql {
      */
     protected function col_priority($row) {
         global $OUTPUT;
-//        return tool_roland04_api::print_priority_badge($row->priority);
 
         $tagcollections =  [0 => 'Low', 1 => 'Medium', 2 => 'High'];
         $tmpl = new \core\output\inplace_editable('tool_roland04', 'todopriority',

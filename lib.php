@@ -108,7 +108,7 @@ function tool_roland04_inplace_editable($itemtype, $itemid, $newvalue) {
 
         $tmpl = new inplace_editable('tool_roland04', 'todopriority', $record->id, true,
             tool_roland04_api::print_priority_badge($record->priority), $record->priority, 'Edit mytest name',  'New value for ' . format_string($record->name));
-        $tagcollections =  [0 => 'Low', 1 => 'Medium', 2 => 'High'];
+        $tagcollections = [0 => 'Low', 1 => 'Medium', 2 => 'High'];
         $tmpl->set_type_select($tagcollections);
         return $tmpl;
     }
