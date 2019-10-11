@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class tool_roland04_api
+ * Class tool_roland04_api_testcase
  *
  * @package    tool_roland04
  * @copyright  2019 Mikel Martín
@@ -76,9 +76,6 @@ class tool_roland04_api_testcase extends advanced_testcase {
         $data = new stdClass();
         $data->courseid = $course->id;
         $data->name = 'todo1';
-        $data->priority = 0;
-        $data->completed = 0;
-        $data->description = 'desc';
         $todoid = tool_roland04_api::create_todo($data);
 
         // Update the TODO.

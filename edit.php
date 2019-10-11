@@ -54,7 +54,6 @@ if ($delete = optional_param('delete', 0, PARAM_INT)) {
 }
 
 $url = new moodle_url('/admin/tool/roland04/edit.php');
-$pagetitle = get_string('addtodo', 'tool_roland04');
 
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context($context);
