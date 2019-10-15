@@ -28,4 +28,4 @@ $plugin->component = 'tool_roland04';
 $plugin->version = '2019101500';
 $plugin->requires = '2018051708';
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = '2.2';
+$plugin->release = '2.5';
