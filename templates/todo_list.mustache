@@ -16,9 +16,9 @@
 }}
 
 {{!
-    @template tool_analytics/models_list
+    @template tool_roland04/todo_list
 
-    Template for models list.
+    Template for TODO list.
 
     Classes required for JS:
     * none
@@ -46,6 +46,9 @@
 
 {{#js}}
     require(['tool_roland04/confirm_delete'], function(c) {
+    c.init();
+    });
+    require(['tool_roland04/update_timemodified'], function(c) {
     c.init();
     });
 {{/js}}

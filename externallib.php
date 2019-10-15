@@ -36,6 +36,8 @@ require_once($CFG->libdir . "/externallib.php");
 class tool_roland04_external extends external_api {
 
     /**
+     * Parameters for delete_todo
+     *
      * @return external_function_parameters
      */
     public static function delete_todo_parameters() {
@@ -47,6 +49,8 @@ class tool_roland04_external extends external_api {
     }
 
     /**
+     * Return for delete_todo
+     *
      * @return null
      */
     public static function delete_todo_returns() {
@@ -54,6 +58,8 @@ class tool_roland04_external extends external_api {
     }
 
     /**
+     * delete_todo API function
+     *
      * @param $id
      */
     public static function delete_todo($id) {
@@ -73,6 +79,8 @@ class tool_roland04_external extends external_api {
     }
 
     /**
+     * Parameters for get_todo_list
+     *
      * @return external_function_parameters
      */
     public static function get_todo_list_parameters() {
@@ -84,6 +92,8 @@ class tool_roland04_external extends external_api {
     }
 
     /**
+     * Return for get_todo_list
+     *
      * @return external_single_structure
      */
     public static function get_todo_list_returns() {
@@ -97,6 +107,8 @@ class tool_roland04_external extends external_api {
     }
 
     /**
+     * get_todo_list API function
+     *
      * @param $courseid
      * @return stdClass
      */

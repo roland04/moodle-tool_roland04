@@ -80,7 +80,16 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_name($row) {
-        return format_string($row->name);
+        global $OUTPUT;
+
+        $tmpl = new \core\output\inplace_editable('tool_roland04', 'todoname',
+            $row->id, has_capability('tool/roland04:edit', context_system::instance()),
+            $this->format_text($row->name),
+            $row->name,
+            get_string('editnamehint', 'tool_roland04'),
+            get_string('editnamelabel', 'tool_roland04')
+        );
+        return $OUTPUT->render($tmpl);
     }
 
     /**
@@ -90,7 +99,20 @@ class tool_roland04_table extends table_sql {
      * @return string
      */
     protected function col_completed($row) {
-        return tool_roland04_api::print_completion_icon($row->completed);
+        global $OUTPUT;
+
+        $tmpl = new \core\output\inplace_editable(
+            'tool_roland04',
+            'todocompleted',
+            $row->id,
+            has_capability('tool/roland04:edit', context_system::instance()),
+            tool_roland04_api::print_completion_icon($row->completed),
+            (int)$row->completed,
+            get_string('editcompletedhint', 'tool_roland04')
+        );
+        $tmpl->set_type_toggle(array(0, 1));
+
+        return $OUTPUT->render($tmpl);
     }
 
     /**
@@ -103,9 +125,16 @@ class tool_roland04_table extends table_sql {
         global $OUTPUT;
 
         $tagcollections = [0 => 'Low', 1 => 'Medium', 2 => 'High'];
-        $tmpl = new \core\output\inplace_editable('tool_roland04', 'todopriority',
-            $row->id, has_capability('tool/roland04:edit', context_system::instance()),
-            tool_roland04_api::print_priority_badge($row->priority), $row->priority, '$edithint', '$editlabel');
+        $tmpl = new \core\output\inplace_editable(
+            'tool_roland04',
+            'todopriority',
+            $row->id,
+            has_capability('tool/roland04:edit', context_system::instance()),
+            tool_roland04_api::print_priority_badge($row->priority),
+            $row->priority,
+            get_string('editpriorityhint', 'tool_roland04'),
+            get_string('editprioritylabel', 'tool_roland04')
+        );
         $tmpl->set_type_select($tagcollections);
         return $OUTPUT->render($tmpl);
     }

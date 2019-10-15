@@ -1,4 +1,3 @@
-<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -13,30 +12,23 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * Web services for tool_devcourse
+ * Update timemodified
  *
+ * @module     tool_roland04/update_timemodified
  * @package    tool_roland04
  * @copyright  2019 Mikel Martín
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
-
-$functions = array(
-    'tool_roland04_delete_todo' => array(
-        'classname'    => 'tool_roland04_external',
-        'methodname'   => 'delete_todo',
-        'description'  => 'Deletes a TODO',
-        'type'         => 'write',
-        'capabilities' => 'tool/roland04:edit',
-        'ajax'         => true,
-    ),
-    'tool_roland04_get_todo_list' => array(
-        'classname'    => 'tool_roland04_external',
-        'methodname'   => 'get_todo_list',
-        'description'  => 'Gets todo list renderable',
-        'type'         => 'read',
-        'capabilities' => 'tool/roland04:view',
-        'ajax'         => true,
-    )
-);
+define(['jquery'], function($) {
+    return {
+        init: function() {
+            $('body').on('updated', '[data-inplaceeditable]', function(e) {
+                // TODO: Update timemodified in table.
+                // eslint-disable-next-line no-console
+                console.log(e.ajaxreturn);
+            });
+        }
+    };
+});

@@ -73,6 +73,11 @@ class todo_created extends \core\event\base {
         return new \moodle_url('/admin/tool/roland04/edit.php', array('id' => $this->objectid));
     }
 
+    /**
+     * Get object mapping
+     *
+     * @return array|string
+     */
     public static function get_objectid_mapping() {
         // No mapping required for this event because event monitor rules are not backed up.
         return array('db' => 'tool_roland04', 'restore' => \core\event\base::NOT_MAPPED);

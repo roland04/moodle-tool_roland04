@@ -49,4 +49,9 @@ $output = $PAGE->get_renderer('tool_roland04');
 echo $output->header();
 echo $output->heading($pagetitle);
 echo $output->render($outputpage);
+
+$PAGE->requires->js_amd_inline("
+
+");
+
 echo $output->footer();
