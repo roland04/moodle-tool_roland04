@@ -41,7 +41,7 @@ class eventobservers {
      *
      * @param \core\event\course_deleted $event
      */
-    public static function course_deleted(\core\event\course_deleted $event){
+    public static function course_deleted(\core\event\course_deleted $event) {
         global $DB;
 
         $DB->delete_records('tool_roland04', array('courseid' => $event->courseid));

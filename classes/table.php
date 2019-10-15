@@ -166,7 +166,7 @@ class tool_roland04_table extends table_sql {
             );
         $deletelink = html_writer::link(new moodle_url('./edit.php', ['id' => $row->id, 'delete' => 1, 'sesskey' => sesskey()]),
                 $deleteicon,
-                ['aria-label' => $deletetext, 'data-action' => 'deletetodo']
+                ['aria-label' => $deletetext, 'data-action' => 'deletetodo', 'data-todoid' => $row->id]
             );
         return $editlink.$deletelink;
     }

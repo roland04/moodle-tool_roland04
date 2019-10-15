@@ -66,6 +66,7 @@ class todo_list implements \renderable, \templatable {
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
         $context = context_course::instance($this->courseid);
+        $data->courseid = $this->courseid;
 
         // Generate "Add TODO" button.
         if (has_capability('tool/roland04:edit', $context)) {

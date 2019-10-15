@@ -44,7 +44,7 @@ class tool_roland04_events_testcase extends advanced_testcase {
     /**
      * Test TODO creation event
      */
-    public function test_todo_created(){
+    public function test_todo_created() {
         $course = $this->getDataGenerator()->create_course();
         $sink = $this->redirectEvents();
         $todoid = tool_roland04_api::create_todo((object)[
