@@ -99,8 +99,10 @@ function tool_roland04_inplace_editable($itemtype, $itemid, $newvalue) {
     global $DB;
 
     $record = $DB->get_record('tool_roland04', array('id' => $itemid), '*', MUST_EXIST);
-    \external_api::validate_context(context_system::instance());
-    require_capability('tool/roland04:edit', context_system::instance());
+
+    $context = context_course::instance($record->courseid);
+    \external_api::validate_context($context);
+    require_capability('tool/roland04:edit', $context);
 
     $newvalue = clean_param($newvalue, PARAM_NOTAGS);
 

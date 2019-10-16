@@ -41,7 +41,7 @@ if ($id = optional_param('id', 0, PARAM_INT)) {
 $course = get_course($courseid);
 $toform->courseid = $courseid;
 
-require_login();
+require_login($course);
 $context = context_course::instance($courseid);
 require_capability('tool/roland04:edit', $context);
 
