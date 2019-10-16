@@ -41,6 +41,7 @@ $string['priority'] = 'Priority';
 $string['priority0'] = 'Low';
 $string['priority1'] = 'Medium';
 $string['priority2'] = 'High';
+$string['privacy:metadata'] = 'Tool roland04 only displays TODOs generated data.';
 $string['roland04:edit'] = 'Edit TODOs in a course';
 $string['roland04:view'] = 'View TODOs in a course';
 $string['timecreated'] = 'Time created';

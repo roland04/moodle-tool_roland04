@@ -60,4 +60,6 @@ class tool_roland04_events_testcase extends advanced_testcase {
         $this->assertEquals($event->objectid, $todoid);
         $this->assertEquals($event->courseid, $course->id);
     }
+
+    // TODO: update and delete tests
 }
