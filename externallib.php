@@ -60,7 +60,7 @@ class tool_roland04_external extends external_api {
     /**
      * delete_todo API function
      *
-     * @param $id
+     * @param int $id
      */
     public static function delete_todo($id) {
         $params = self::validate_parameters(self::delete_todo_parameters(),
@@ -109,7 +109,7 @@ class tool_roland04_external extends external_api {
     /**
      * get_todo_list API function
      *
-     * @param $courseid
+     * @param int $courseid
      * @return stdClass
      */
     public static function get_todo_list($courseid) {

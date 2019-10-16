@@ -112,16 +112,13 @@ function tool_roland04_inplace_editable($itemtype, $itemid, $newvalue) {
             format_string($record->name));
         $tagcollections = [0 => 'Low', 1 => 'Medium', 2 => 'High'];
         $tmpl->set_type_select($tagcollections);
-    }
-
-    else if ($itemtype === 'todoname'){
+    } else if ($itemtype === 'todoname') {
+        // TODO: Bug with repeated name
         $DB->update_record('tool_roland04', (object)['id' => $itemid, 'name' => $newvalue, 'timemodified' => time()]);
         $record->name = $newvalue;
         $tmpl = new inplace_editable('tool_roland04', 'todoname', $record->id, true,
            format_text($record->name) , $record->name, get_string('edit'), format_string($record->name));
-    }
-
-    else if ($itemtype === 'todocompleted'){
+    } else if ($itemtype === 'todocompleted') {
         $DB->update_record('tool_roland04', (object)['id' => $itemid, 'completed' => $newvalue, 'timemodified' => time()]);
         $record->completed = $newvalue;
         $tmpl = new inplace_editable('tool_roland04', 'todocompleted', $record->id, true,
@@ -129,6 +126,5 @@ function tool_roland04_inplace_editable($itemtype, $itemid, $newvalue) {
             get_string('edit'), format_string($record->completed));
         $tmpl->set_type_toggle(array(0, 1));
     }
-
     return $tmpl;
 }
