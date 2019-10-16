@@ -14,12 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Backup
+ *
+ * @package    tool_roland04
+ * @copyright  2019 Mikel Martín
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/backup/moodle2/backup_tool_plugin.class.php');
 
+/**
+ * backup_tool_roland04_plugin
+ *
+ * @package    tool_roland04
+ * @copyright  2019 Mikel Martín
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class backup_tool_roland04_plugin extends backup_tool_plugin {
 
+    /**
+     * Backup process
+     *
+     * @return backup_plugin_element
+     */
     protected function define_course_plugin_structure() {
         $plugin = $this->get_plugin_element();
 

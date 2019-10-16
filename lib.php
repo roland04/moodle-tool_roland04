@@ -90,9 +90,9 @@ function tool_roland04_pluginfile($course, $cm, $context, $filearea, $args, $for
 /**
  * Inplace editable callback for tool_rolad04
  *
- * @param $itemtype
- * @param $itemid
- * @param $newvalue
+ * @param string $itemtype
+ * @param string $itemid
+ * @param string $newvalue
  * @return inplace_editable
  */
 function tool_roland04_inplace_editable($itemtype, $itemid, $newvalue) {
@@ -113,7 +113,7 @@ function tool_roland04_inplace_editable($itemtype, $itemid, $newvalue) {
         $tagcollections = [0 => 'Low', 1 => 'Medium', 2 => 'High'];
         $tmpl->set_type_select($tagcollections);
     } else if ($itemtype === 'todoname') {
-        // TODO: Bug with repeated name
+        // TODO: Bug with repeated name.
         $DB->update_record('tool_roland04', (object)['id' => $itemid, 'name' => $newvalue, 'timemodified' => time()]);
         $record->name = $newvalue;
         $tmpl = new inplace_editable('tool_roland04', 'todoname', $record->id, true,
